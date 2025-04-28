@@ -83,3 +83,12 @@ d        | 4      | dist: 2, ansc_ref: null   | dist: 0, ansc_ref: null
 e        | 4      | dist: 3, ansc_ref: c      | dist: 3, ansc_ref: c     
 [1, 2]   | 6      | dist: 3, ansc_ref: c      | dist: 3, ansc_ref: c     
 
+NODE LIST<>:
+id       | dist   | node                      | ansc                     
+---------+--------+---------------------------+--------------------------
+[0, 1]   | 2      | dist: 0, ansc_ref: null   | null                     
+c        | 3      | dist: 2, ansc_ref: null   | dist: 0, ansc_ref: null  
+d        | 4      | dist: 2, ansc_ref: null   | dist: 0, ansc_ref: null  
+e        | 4      | dist: 3, ansc_ref: c      | dist: 3, ansc_ref: c     
+[1, 2]   | 6      | dist: 3, ansc_ref: c      | dist: 3, ansc_ref: c     
+
