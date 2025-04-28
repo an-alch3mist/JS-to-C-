@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -114,6 +114,7 @@ public static class console
 		// Header
 		sb.AppendLine($"key".PadRight(keyWidth) + " | " + $"VAL".PadRight(valueWidth));
 		sb.AppendLine(new string('-', keyWidth) + "+-" + new string('-', valueWidth));
+
 
 		// Rows
 		for (int i = 0; i < keys.Count; i++)
