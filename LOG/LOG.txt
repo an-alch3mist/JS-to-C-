@@ -1,0 +1,85 @@
+LIST:
+	0__ dist: 2, ansc: ~ 
+	1__ dist: 3, ansc: DEBUG_U+Node 
+	2__ dist: 4, ansc: DEBUG_U+Node 
+	3__ dist: 4, ansc: DEBUG_U+Node 
+	4__ dist: 6, ansc: DEBUG_U+Node 
+
+LIST<>:
+	0__ id: [0, 1], dist: 2, ansc: ~ 
+	1__ id: c, dist: 3, ansc: dist: 0, ansc_ref: null 
+	2__ id: d, dist: 4, ansc: dist: 0, ansc_ref: null 
+	3__ id: e, dist: 4, ansc: dist: 3, ansc_ref: c 
+	4__ id: [1, 2], dist: 6, ansc: dist: 3, ansc_ref: c 
+
+id              | dist            | ansc           
+------------------------------------------------------
+[0, 1]          | 2               | null           
+c               | 3               | dist: 0, ansc_ref: null
+d               | 4               | dist: 0, ansc_ref: null
+e               | 4               | dist: 3, ansc_ref: c
+[1, 2]          | 6               | dist: 3, ansc_ref: c
+
+LIST<>:
+id              | dist            | ansc           
+------------------------------------------------------
+    0 | [0, 1]          | 2               | null           
+    1 | c               | 3               | dist: 0, ansc_ref: null
+    2 | d               | 4               | dist: 0, ansc_ref: null
+    3 | e               | 4               | dist: 3, ansc_ref: c
+    4 | [1, 2]          | 6               | dist: 3, ansc_ref: c
+
+id              | dist            | ansc           
+------------------------------------------------------
+[0, 1]          | 2               | null           
+c               | 3               | dist: 0, ansc_ref: null
+d               | 4               | dist: 0, ansc_ref: null
+e               | 4               | dist: 3, ansc_ref: c
+[1, 2]          | 6               | dist: 3, ansc_ref: c
+
+LIST<>:
+id              | dist            | ansc           
+------------------------------------------------------
+[0, 1]          | 2               | null           
+c               | 3               | dist: 0, ansc_ref: null
+d               | 4               | dist: 0, ansc_ref: null
+e               | 4               | dist: 3, ansc_ref: c
+[1, 2]          | 6               | dist: 3, ansc_ref: c
+
+NODE LIST<>:
+id              | dist            | ansc           
+------------------------------------------------------
+[0, 1]          | 2               | null           
+c               | 3               | dist: 0, ansc_ref: null
+d               | 4               | dist: 0, ansc_ref: null
+e               | 4               | dist: 3, ansc_ref: c
+[1, 2]          | 6               | dist: 3, ansc_ref: c
+
+NODE LIST<>:
+id              | dist            | node            | ansc           
+------------------------------------------------------------------------
+[0, 1]          | 2               | dist: 0, ansc_ref: null | null           
+c               | 3               | dist: 2, ansc_ref: null | dist: 0, ansc_ref: null
+d               | 4               | dist: 2, ansc_ref: null | dist: 0, ansc_ref: null
+e               | 4               | dist: 3, ansc_ref: c | dist: 3, ansc_ref: c
+[1, 2]          | 6               | dist: 3, ansc_ref: c | dist: 3, ansc_ref: c
+
+NODE LIST<>:
+id              | dist            | node            | ansc           
+------------------------------------------------------------------------
+[0, 1]          | 2               | dist: 0, ansc_ref: null | null           
+c               | 3               | dist: 2, ansc_ref: null | dist: 0, ansc_ref: null
+d               | 4               | dist: 2, ansc_ref: null | dist: 0, ansc_ref: null
+e               | 4               | dist: 3, ansc_ref: c | dist: 3, ansc_ref: c
+[1, 2]          | 6               | dist: 3, ansc_ref: c | dist: 3, ansc_ref: c
+
+
+NODE LIST<>:
+id       | dist   | node                      | ansc                     
+-------------------------------------------------------------------------
+[0, 1]   | 2      | dist: 0, ansc_ref: null   | null                     
+c        | 3      | dist: 2, ansc_ref: null   | dist: 0, ansc_ref: null  
+d        | 4      | dist: 2, ansc_ref: null   | dist: 0, ansc_ref: null  
+e        | 4      | dist: 3, ansc_ref: c      | dist: 3, ansc_ref: c     
+[1, 2]   | 6      | dist: 3, ansc_ref: c      | dist: 3, ansc_ref: c     
+
