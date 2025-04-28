@@ -24,7 +24,7 @@ public static string toTable<T>(this IEnumerable<T> list, string name = "LIST<>"
 	var sb = new StringBuilder();
 	var type = typeof(T);
 	var fields = type.GetFields(
-		BindingFlags.Public | BindingFlags.Instance
+		BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic
 	);
 
 	// Calculate column widths
@@ -41,7 +41,13 @@ public static string toTable<T>(this IEnumerable<T> list, string name = "LIST<>"
 	}
 
 	// Header
-	sb.AppendLine(string.Join(" | ", fields.Select((f, i) => f.Name.PadRight(columnWidths[i]))));
+	sb.AppendLine(string.Join(" | ", fields.Select((f, i) =>
+	{
+		string fieldName = f.Name;
+		if (!f.IsPublic)
+			fieldName = "-" + fieldName; // prefix - for private field
+		return fieldName.PadRight(columnWidths[i]);
+	})));
 
 	// Separator line(dashes + +-separators),before: sb.AppendLine(new string('-', columnWidths.Sum() + (fields.Length - 1) * 3));
 	for (int i0 = 0; i0 < fields.Length; i0 += 1)
