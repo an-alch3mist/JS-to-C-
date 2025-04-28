@@ -29,8 +29,10 @@ public static class console
 		catch (Exception e) { Debug.LogError($"Failed to write to log file: {e.Message}"); }
 	}
 
-	// does to ToString() for each of attribute, with thier name in column
+
 	/// <summary>
+	/// make sure element class got ovverriden ToString() method
+	/// does to ToString() for each of attribute, with thier name in column
 	/// Renders a list of T into a plain-text table. 
 	/// Columns are sized to fit the widest cell in each column.
 	/// </summary>
@@ -55,7 +57,7 @@ public static class console
 			columnWidths[i] = fields[i].Name.Length;
 			foreach (var item in items)
 			{
-				var val = fields[i].GetValue(item);
+				object val = fields[i].GetValue(item);
 				columnWidths[i] = Math.Max(columnWidths[i], (val?.ToString() ?? "null").Length);
 			}
 			columnWidths[i] += 2; // Add a little padding
@@ -63,7 +65,15 @@ public static class console
 
 		// Header
 		sb.AppendLine(string.Join(" | ", fields.Select((f, i) => f.Name.PadRight(columnWidths[i]))));
-		sb.AppendLine(new string('-', columnWidths.Sum() + (fields.Length - 1) * 3));
+
+		// Separator line(dashes + +-separators),before: sb.AppendLine(new string('-', columnWidths.Sum() + (fields.Length - 1) * 3));
+		for (int i0 = 0; i0 < fields.Length; i0 += 1)
+		{
+			sb.Append(new string('-', columnWidths[i0]));
+			if (i0 < fields.Length - 1)
+				sb.Append("-+-"); // seperator
+		}
+		sb.AppendLine();
 
 		// Rows
 		foreach (var item in items)
@@ -79,89 +89,6 @@ public static class console
 		return $"{name}:\n" + sb.ToString();
 	}
 
-}
-
-public static class list__to__table
-{
-	public static string incorrect_spacing_tab_toTable<T>(this IEnumerable<T> collection, string name = "LIST<>")
-	{
-		if (collection == null) return $"{name}: null";
-		if (!collection.Any()) return $"{name}: empty";
-
-		Type type = typeof(T);
-		bool isSimpleType = IsSimpleType(type);
-
-		var sb = new StringBuilder();
-		sb.AppendLine($"{name}:");
-
-		if (isSimpleType)	BuildSimpleTable(sb, collection);
-		else				BuildComplexTable(sb, collection, type);
-
-		return sb.ToString();
-	}
-
-	static bool IsSimpleType(Type type)
-	{
-		return type.IsPrimitive
-			|| type.IsEnum
-			|| type == typeof(string)
-			|| type == typeof(decimal)
-			|| type == typeof(DateTime);
-	}
-	static void BuildSimpleTable<T>(StringBuilder sb, IEnumerable<T> collection)
-	{
-		sb.AppendLine("Index | Value");
-		sb.AppendLine("------|------");
-
-		int index = 0;
-		foreach (var item in collection)
-		{
-			sb.AppendLine($"{index++,5} | {item?.ToString() ?? "null"}");
-		}
-	}
-	static void BuildComplexTable<T>(StringBuilder sb, IEnumerable<T> collection, Type type)
-	{
-		var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-		var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
-		var columns = new List<MemberInfo>();
-		columns.AddRange(properties);
-		columns.AddRange(fields);
-
-		if (columns.Count == 0)
-		{
-			sb.AppendLine("No public properties/fields");
-			return;
-		}
-
-		// Build header
-		sb.AppendLine(string.Join(" | ", columns.Select(c => c.Name.PadRight(15))));
-		sb.AppendLine(new string('-', columns.Count * 18));
-
-		// Build rows
-		int rowIndex = 0;
-		foreach (var item in collection)
-		{
-			if (item == null)
-			{
-				sb.AppendLine($"{rowIndex, 5} | {"null".PadRight(15)}");
-				rowIndex += 1;
-				continue;
-			}
-
-			var values = columns.Select(c =>
-			{
-				object value = c is PropertyInfo pi
-					? pi.GetValue(item)
-					: ((FieldInfo)c).GetValue(item);
-
-				// value.ToString()
-				return (value?.ToString() ?? "null").PadRight(15);
-			});
-
-			sb.AppendLine($"{rowIndex,5} | {string.Join(" | ", values)}");
-			rowIndex += 1;
-		}
-	}
 }
 
 #region prev_extension__to_table
