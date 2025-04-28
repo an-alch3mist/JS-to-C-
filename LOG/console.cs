@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -95,8 +95,8 @@ public static class console
 		return $"{name}:\n" + sb.ToString();
 	}
 
-	// DICTIONARY<>
-	public static string toTable<TKey, TValue>(this Dictionary<TKey, TValue> dict, string name = "DICTIONARY<>")
+	// MAP<>
+	public static string toTable<TKey, TValue>(this Dictionary<TKey, TValue> dict, string name = "MAP<>")
 	{
 		if (dict == null)
 			return "dictionary is null";
