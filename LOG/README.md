@@ -1,14 +1,11 @@
 ![`C#`](https://github.com/user-attachments/assets/a17172e4-6f6d-401e-9be8-bce3e6324f49)
 
-
 ![txt](https://github.com/user-attachments/assets/192f001c-92d6-4fd3-9541-411ce8ea5edf)
-
 
 ```txt
 column width initially => FIELD[i].length
 the column width is determined by the element with max toString().length + padding(2)
 ```
-
 ```cs
 /// <summary>
 /// make sure element class got ovverriden ToString() method
