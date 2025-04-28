@@ -95,6 +95,36 @@ public static class console
 		return $"{name}:\n" + sb.ToString();
 	}
 
+	// DICTIONARY<>
+	public static string toTable<TKey, TValue>(this Dictionary<TKey, TValue> dict, string name = "DICTIONARY<>")
+	{
+		if (dict == null)
+			return "dictionary is null";
+		if (dict.Count == 0)
+			return "dictionary got no elem";
+
+		var sb = new StringBuilder();
+		var keys = dict.Keys.ToList();
+		var values = dict.Values.ToList();
+
+		// Calculate column widths
+		int keyWidth = Math.Max("Key".Length, keys.Max(k => k?.ToString().Length ?? 0)) + 2;
+		int valueWidth = Math.Max("Value".Length, values.Max(v => v?.ToString().Length ?? 0)) + 2;
+
+		// Header
+		sb.AppendLine($"key".PadRight(keyWidth) + " | " + $"VAL".PadRight(valueWidth));
+		sb.AppendLine(new string('-', keyWidth) + "+-" + new string('-', valueWidth));
+
+		// Rows
+		for (int i = 0; i < keys.Count; i++)
+		{
+			string key = keys[i]?.ToString() ?? "null";
+			string value = values[i]?.ToString() ?? "null";
+			sb.AppendLine(key.PadRight(keyWidth) + " | " + value.PadRight(valueWidth));
+		}
+
+		return $"{name}:\n" + sb.ToString();
+	}
 }
 
 #region prev_extension__to_table
