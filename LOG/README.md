@@ -79,7 +79,7 @@ public static string toTable<T>(this IEnumerable<T> list, string name = "LIST<>"
 
 ```cs
 	// MAP<>
-	public static string toTable<TKey, TValue>(this Dictionary<TKey, TValue> dict, string name = "DICTIONARY<>")
+	public static string toTable<TKey, TValue>(this Dictionary<TKey, TValue> dict, string name = "MAP<>")
 	{
 		if (dict == null)
 			return "dictionary is null";
