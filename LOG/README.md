@@ -20,11 +20,13 @@ public static string toTable<T>(this IEnumerable<T> list, string name = "LIST<>"
 	var items = list.ToList();
 	if (items.Count == 0)
 		return "list got no elem";
+
 	var sb = new StringBuilder();
 	var type = typeof(T);
 	var fields = type.GetFields(
 		BindingFlags.Public | BindingFlags.Instance
 	);
+
 	// Calculate column widths
 	var columnWidths = new int[fields.Length];
 	for (int i = 0; i < fields.Length; i++)
@@ -33,13 +35,15 @@ public static string toTable<T>(this IEnumerable<T> list, string name = "LIST<>"
 		foreach (var item in items)
 		{
 			object val = fields[i].GetValue(item);
-			columnWidths[i] = Math.Max(columnWidths[i], (val?.ToString() ?? 
+			columnWidths[i] = Math.Max(columnWidths[i], (val?.ToString() ?? "null").Length);
 		}
 		columnWidths[i] += 2; // Add a little padding
 	}
+
 	// Header
-	sb.AppendLine(string.Join(" | ", fields.Select((f, i) => f.Name.PadRight(columnWidths
-	// Separator line(dashes + +-separators),before: sb.AppendLine(new string('-', 
+	sb.AppendLine(string.Join(" | ", fields.Select((f, i) => f.Name.PadRight(columnWidths[i]))));
+
+	// Separator line(dashes + +-separators),before: sb.AppendLine(new string('-', columnWidths.Sum() + (fields.Length - 1) * 3));
 	for (int i0 = 0; i0 < fields.Length; i0 += 1)
 	{
 		sb.Append(new string('-', columnWidths[i0]));
@@ -47,6 +51,7 @@ public static string toTable<T>(this IEnumerable<T> list, string name = "LIST<>"
 			sb.Append("-+-"); // seperator
 	}
 	sb.AppendLine();
+
 	// Rows
 	foreach (var item in items)
 	{
@@ -57,6 +62,7 @@ public static string toTable<T>(this IEnumerable<T> list, string name = "LIST<>"
 		});
 		sb.AppendLine(string.Join(" | ", values));
 	}
+
 	return $"{name}:\n" + sb.ToString();
 }
 ```
