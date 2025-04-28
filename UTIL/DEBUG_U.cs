@@ -47,10 +47,16 @@ public class DEBUG_U : MonoBehaviour
 		console.log_txt(NODE.toTable("NODE LIST<>"));
 
 		Node node = NODE.find(_node => _node.dist == 4f);
-		if (node != null)
-			Debug.Log(node.ansc.dist);
-		else
-			Debug.Log("found none");
+		if (node != null) Debug.Log(node.ansc.dist);
+		else			  Debug.Log("node = null");
+
+		Dictionary<string, int> doc = new Dictionary<string, int>()
+		{
+			{"A", 1},
+			{"B", 2},
+			{"C", 3},
+		};
+		console.log_txt(doc.toTable("DOC MAP<>"));
 	}
 
 	public class Node
@@ -59,6 +65,7 @@ public class DEBUG_U : MonoBehaviour
 		public float dist = 0f;
 		public Node node;
 		public Node ansc = null;
+		float s = 0f;
 
 		public override string ToString()
 		{
