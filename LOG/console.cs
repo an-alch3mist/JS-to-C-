@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -108,8 +108,8 @@ public static class console
 		var values = dict.Values.ToList();
 
 		// Calculate column widths
-		int keyWidth = Math.Max("Key".Length, keys.Max(k => k?.ToString().Length ?? 0)) + 2;
-		int valueWidth = Math.Max("Value".Length, values.Max(v => v?.ToString().Length ?? 0)) + 2;
+		int keyWidth = Math.Max("key".Length, keys.Max(k => k?.ToString().Length ?? 0)) + 2;
+		int valueWidth = Math.Max("VAL".Length, values.Max(v => v?.ToString().Length ?? 0)) + 2;
 
 		// Header
 		sb.AppendLine($"key".PadRight(keyWidth) + " | " + $"VAL".PadRight(valueWidth));
