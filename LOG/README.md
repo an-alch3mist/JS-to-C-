@@ -74,6 +74,7 @@ public static string toTable<T>(this IEnumerable<T> list, string name = "LIST<>"
 ```
 
 ![image](https://github.com/user-attachments/assets/8fe00cde-8cb4-4d7c-b57d-8ceccd270e39)
+<br>
 ![image](https://github.com/user-attachments/assets/e948039f-3b02-47bb-8f1b-e64238a002f9)
 
 ```cs
